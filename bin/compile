@@ -32,8 +32,7 @@ fi
 
 topic "Unpacking supervisord"
 mkdir -p "${CACHE_DIR}/supervisord"
-tar -xf "${CACHE_DIR}/${TAR_FILE_NAME}" -C "${CACHE_DIR}/supervisord"
+tar -xf "${CACHE_DIR}/${TAR_FILE_NAME}" -C "${CACHE_DIR}/supervisord" --strip-components=1
 
 topic "Moving supervisord to bin"
-ls -lah "${CACHE_DIR}/supervisord"
 mv "${CACHE_DIR}/supervisord/supervisord" $BUILD_DIR/bin
