@@ -25,6 +25,8 @@ function topic() {
 if [ ! -f "${CACHE_DIR}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz" ]; then
   topic "Downloading supervisord"
   wget "https://github.com/ochinchina/supervisord/releases/download/v${SUPERVISORD_VERSION}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz" $CACHE_DIR
+else
+  topic "Using cached supervisord"
 fi
 
 topic "Unpacking supervisord"
