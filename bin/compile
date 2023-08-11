@@ -5,7 +5,7 @@
 set -eo pipefail
 
 # debug
-# set -x
+set -x
 
 # parse and derive params
 BUILD_DIR=$1
@@ -30,7 +30,7 @@ else
 fi
 
 topic "Unpacking supervisord"
-tar -xf "${CACHE_DIR}/supervisord.tar.gz" -C "${CACHE_DIR}"
+tar -xf "$CACHE_DIR/supervisord.tar.gz" -C $CACHE_DIR
 
 topic "Moving supervisord to bin"
-mv "${CACHE_DIR}/supervisord" "${BUILD_DIR}/bin"
+mv $CACHE_DIR/supervisord $BUILD_DIR/bin
