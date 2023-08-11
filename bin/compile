@@ -1,5 +1,34 @@
 #!/usr/bin/env bash
-# bin/detect <build-dir>
+# bin/compile <build-dir> <cache-dir> <env-dir>
 
-echo "Supervisord"
-exit 0
+# fail fast
+set -eo pipefaila
+
+# debug
+# set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+SUPERVISORD_VERSION="${SUPERVISORD_VERSION:-0.7.3}"
+
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+if [ ! -f "${CACHE_DIR}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz" ]; then
+  topic "Downloading supervisord"
+  wget "https://github.com/ochinchina/supervisord/releases/download/v${SUPERVISORD_VERSION}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz" $CACHE_DIR
+fi
+
+topic "Unpacking supervisord"
+tar -xf "${CACHE_DIR}/supervisord.tar.gz" -C "${CACHE_DIR}"
+
+topic "Moving supervisord to bin"
+mv "${CACHE_DIR}/supervisord" "${BUILD_DIR}/bin"
