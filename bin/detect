@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-if [ -f $BUILD_DIR/bin/supervisord ]; then
-  echo "Supervisord"
-  exit 0
-else
-  exit 1
-fi
+echo "Supervisord"
+exit 0
