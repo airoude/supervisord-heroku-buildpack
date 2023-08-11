@@ -12,6 +12,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 SUPERVISORD_VERSION="${SUPERVISORD_VERSION:-0.7.3}"
+TAR_FILE_NAME="supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz"
 
 function error() {
   echo " !     $*" >&2
@@ -22,15 +23,15 @@ function topic() {
   echo "-----> $*"
 }
 
-if [ ! -f "${CACHE_DIR}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz" ]; then
+if [ ! -f "${CACHE_DIR}/${TAR_FILE_NAME}" ]; then
   topic "Downloading supervisord"
-  wget -P $CACHE_DIR "https://github.com/ochinchina/supervisord/releases/download/v${SUPERVISORD_VERSION}/supervisord_${SUPERVISORD_VERSION}_Linux_64-bit.tar.gz"
+  wget -P $CACHE_DIR "https://github.com/ochinchina/supervisord/releases/download/v${SUPERVISORD_VERSION}/${TAR_FILE_NAME}"
 else
   topic "Using cached supervisord"
 fi
 
 topic "Unpacking supervisord"
-tar -xf "$CACHE_DIR/supervisord.tar.gz" -C $CACHE_DIR
+tar -xf "$CACHE_DIR/$TAR_FILE_NAME" -C $CACHE_DIR
 
 topic "Moving supervisord to bin"
 mv $CACHE_DIR/supervisord $BUILD_DIR/bin
