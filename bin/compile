@@ -31,7 +31,8 @@ else
 fi
 
 topic "Unpacking supervisord"
-tar -xf "$CACHE_DIR/$TAR_FILE_NAME" -C $CACHE_DIR
+mkdir -p "${CACHE_DIR}/supervisord"
+tar -xf "${CACHE_DIR}/${TAR_FILE_NAME}" -C "${CACHE_DIR}/supervisord"
 
 topic "Moving supervisord to bin"
-mv $CACHE_DIR/supervisord $BUILD_DIR/bin
+mv "${CACHE_DIR}/supervisord/supervisord" $BUILD_DIR/bin
